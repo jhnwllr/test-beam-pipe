@@ -17,8 +17,7 @@ import org.apache.beam.sdk.transforms.Regex;
 
 /**
  * //run with 
- * mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.TestPipe \
- *    -Dexec.args="--inputFile=pom.xml --output=counts" -Pdirect-runner	 
+ * mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.TestPipe -Dexec.args="--input=sample.txt --output=dog" -Pdirect-runner
  */
 
 public class TestPipe {
@@ -27,19 +26,19 @@ public class TestPipe {
 
 		@Description("Path of the file to read from")
 		@Default.String("gs://apache-beam-samples/shakespeare/kinglear.txt")
-		String getInputFile();
-		void setInputFile(String value);
+		String getInput();
+		void setInput(String value);
+		
 		@Description("Path of the file to write to")
 		@Default.String("/mnt/c/Users/ftw712/desktop/")
 		String getOutput();
-
 		void setOutput(String value);
 	}
 
 	static void runTestPipe(TestPipeOptions options) {
 		Pipeline p = Pipeline.create(options);
 
-		p.apply("ReadLines", TextIO.read().from(options.getInputFile()))
+		p.apply("ReadLines", TextIO.read().from(options.getInput()))
 		.apply(Regex.replaceAll(" ","dog"))
 		.apply("WriteCounts", TextIO.write().to(options.getOutput()));
 
