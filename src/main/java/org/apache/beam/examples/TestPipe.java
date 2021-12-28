@@ -25,29 +25,29 @@ public class TestPipe {
 
 	public interface TestPipeOptions extends PipelineOptions {
 
-    @Description("Path of the file to read from")
-    @Default.String("gs://apache-beam-samples/shakespeare/kinglear.txt")
-    String getInputFile();
+		@Description("Path of the file to read from")
+		@Default.String("gs://apache-beam-samples/shakespeare/kinglear.txt")
+		String getInputFile();
 
-    void setInputFile(String value);
+		void setInputFile(String value);
 
-    /** Set this required option to specify where to write the output. */
-    @Description("Path of the file to write to")
-    @Default.String("/mnt/c/Users/ftw712/desktop/")
-    String getOutput();
+		/** Set this required option to specify where to write the output. */
+		@Description("Path of the file to write to")
+		@Default.String("/mnt/c/Users/ftw712/desktop/")
+		String getOutput();
 
-    void setOutput(String value);
-  }
-	
-  static void runTestPipe(TestPipeOptions options) {
-    Pipeline p = Pipeline.create(options);
+		void setOutput(String value);
+	}
 
-    p.apply("ReadLines", TextIO.read().from(options.getInputFile()))
-	 .apply(Regex.replaceAll(" ","dog"))
-	 .apply("WriteCounts", TextIO.write().to(options.getOutput()));
-    
-    p.run().waitUntilFinish();
-  }		
+	static void runTestPipe(TestPipeOptions options) {
+		Pipeline p = Pipeline.create(options);
+
+		p.apply("ReadLines", TextIO.read().from(options.getInputFile()))
+		.apply(Regex.replaceAll(" ","dog"))
+		.apply("WriteCounts", TextIO.write().to(options.getOutput()));
+
+		p.run().waitUntilFinish();
+	}
 
 	public static void main(String[] args) {
 		for (int x = 0; x < args.length; x++) System.out.println(args[x]);
@@ -55,4 +55,4 @@ public class TestPipe {
 		runTestPipe(options);
 	}
 
-} 
+}
