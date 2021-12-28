@@ -23,7 +23,6 @@ import org.apache.beam.sdk.transforms.Regex;
 
 public class TestPipe {
 
-	 
 	public interface TestPipeOptions extends PipelineOptions {
 
     @Description("Path of the file to read from")
@@ -53,7 +52,6 @@ public class TestPipe {
 	public static void main(String[] args) {
 		for (int x = 0; x < args.length; x++) System.out.println(args[x]);
 		TestPipeOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().as(TestPipeOptions.class);
-
 		runTestPipe(options);
 	}
 
