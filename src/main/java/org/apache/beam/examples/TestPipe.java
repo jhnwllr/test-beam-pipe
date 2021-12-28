@@ -28,10 +28,7 @@ public class TestPipe {
 		@Description("Path of the file to read from")
 		@Default.String("gs://apache-beam-samples/shakespeare/kinglear.txt")
 		String getInputFile();
-
 		void setInputFile(String value);
-
-		/** Set this required option to specify where to write the output. */
 		@Description("Path of the file to write to")
 		@Default.String("/mnt/c/Users/ftw712/desktop/")
 		String getOutput();
